@@ -37,8 +37,18 @@ function App() {
             filteredShops = shops.filter((shop) => shop.district === selectedDistrict);
         }
 
-        // 根據評論數或評分排序（降序）
-        const sortedShops = [...filteredShops].sort((a, b) => b[sortBy] - a[sortBy]);
+        // 根據評論數或評分排序（降序），評分相同時根據評論數排序
+        const sortedShops = [...filteredShops].sort((a, b) => {
+            if (sortBy === SortType.RATING) {
+                // 評分相同時，根據評論數排序
+                if (a.rating === b.rating) {
+                    return b.userRatingCount - a.userRatingCount;
+                }
+                return b.rating - a.rating;
+            }
+            // 評論數排序
+            return b.userRatingCount - a.userRatingCount;
+        });
 
         // 根據選擇的區域決定顯示數量
         const limit = selectedDistrict === 'all' ? 30 : 5;
