@@ -1,142 +1,42 @@
-import { MessageCircle, Star } from 'lucide-react';
-import { useState, useMemo } from 'react';
+import DistrictSelector from '@/components/organisms/district-selector';
 import Footer from '@/components/organisms/footer';
 import Header from '@/components/organisms/header';
+import LoadingSkeleton from '@/components/organisms/loading-skeleton';
+import ShopList from '@/components/organisms/shop-list';
+import SortControls from '@/components/organisms/sort-controls';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Button } from '@/components/ui/button';
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Skeleton } from '@/components/ui/skeleton';
+import useShopFilters from '@/hooks/use-shop-filters';
 import useTaipeiBeefNoodles from '@/hooks/use-taipei-beef-noodles';
-
-// 排序方式常數
-const SortType = {
-    USER_RATING_COUNT: 'userRatingCount',
-    RATING: 'rating',
-} as const;
-
-type SortType = (typeof SortType)[keyof typeof SortType];
 
 function App() {
     const { data, isLoading, error } = useTaipeiBeefNoodles();
-    const [selectedDistrict, setSelectedDistrict] = useState<string>('all');
-    const [sortBy, setSortBy] = useState<SortType>(SortType.USER_RATING_COUNT);
+    const { shops, updateTime } = data || {};
 
-    const { updateTime, shops } = data || {};
+    const { selectedDistrict, setSelectedDistrict, sortBy, setSortBy, districts, filteredAndSortedShops } =
+        useShopFilters({ shops });
 
-    // 取得所有區域（排除空值）
-    const districts = useMemo(() => {
-        if (!shops) return [];
-        return [...new Set(shops.map((shop) => shop.district).filter(Boolean))];
-    }, [shops]);
-
-    // 根據選擇的區域和排序方式處理資料
-    const filteredAndSortedShops = useMemo(() => {
-        if (!shops) return [];
-
-        // 根據區域篩選
-        let filteredShops = shops;
-        if (selectedDistrict !== 'all') {
-            filteredShops = shops.filter((shop) => shop.district === selectedDistrict);
+    const renderContent = () => {
+        if (isLoading) {
+            return <LoadingSkeleton />;
         }
 
-        // 根據評論數或評分排序（降序），評分相同時根據評論數排序
-        const sortedShops = [...filteredShops].sort((a, b) => {
-            if (sortBy === SortType.RATING) {
-                // 評分相同時，根據評論數排序
-                if (a.rating === b.rating) {
-                    return b.userRatingCount - a.userRatingCount;
-                }
-                return b.rating - a.rating;
-            }
-            // 評論數排序
-            return b.userRatingCount - a.userRatingCount;
-        });
+        if (error) {
+            return (
+                <main className="container mx-auto my-8 p-4">
+                    <p>載入失敗：{error?.message}</p>
+                </main>
+            );
+        }
 
-        // 根據選擇的區域決定顯示數量
-        const limit = selectedDistrict === 'all' ? 30 : 5;
-
-        return sortedShops.slice(0, limit);
-    }, [shops, selectedDistrict, sortBy]);
-
-    if (isLoading) {
         return (
-            <main className="container mx-auto my-8 p-4">
-                <Skeleton className="mb-4 h-4 w-48" />
-                <div className="mb-4 flex flex-wrap items-center gap-2">
-                    <Skeleton className="h-4 w-16" />
-                    <Skeleton className="h-10 w-24" />
-                    <Skeleton className="h-10 w-24" />
-                </div>
-                <div className="mb-4 flex flex-wrap items-center gap-2">
-                    <Skeleton className="h-4 w-16" />
-                    <Skeleton className="h-10 w-[180px]" />
-                </div>
-                <div className="space-y-4">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                        <div key={index} className="space-y-2">
-                            <Skeleton className="h-6 w-3/4" />
-                            <Skeleton className="h-4 w-1/2" />
-                            <div className="flex items-center justify-between">
-                                <div className="flex gap-2">
-                                    <Skeleton className="h-4 w-16" />
-                                    <Skeleton className="h-4 w-20" />
-                                </div>
-                                <Skeleton className="h-10 w-16" />
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </main>
-        );
-    }
-
-    if (error) {
-        return (
-            <main className="container mx-auto my-8 p-4">
-                <p>載入失敗：{error?.message}</p>
-            </main>
-        );
-    }
-
-    return (
-        <>
-            <Header />
             <main className="container mx-auto my-8 p-4">
                 <div className="mb-4 space-y-4">
-                    <div className="flex flex-wrap items-center justify-center gap-2">
-                        <span>排序根據</span>
-                        <Button
-                            variant={sortBy === SortType.USER_RATING_COUNT ? 'default' : 'outline'}
-                            onClick={() => setSortBy(SortType.USER_RATING_COUNT)}
-                        >
-                            <MessageCircle className="size-4" />
-                            評論數
-                        </Button>
-                        <Button
-                            variant={sortBy === SortType.RATING ? 'default' : 'outline'}
-                            onClick={() => setSortBy(SortType.RATING)}
-                        >
-                            <Star className="size-4" />
-                            評分
-                        </Button>
-                    </div>
-                    <div className="flex flex-wrap items-center justify-center gap-2">
-                        <span>區域選擇</span>
-                        <Select value={selectedDistrict} onValueChange={setSelectedDistrict}>
-                            <SelectTrigger className="w-[180px]">
-                                <SelectValue placeholder="全部" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="all">全部</SelectItem>
-                                {districts.map((district) => (
-                                    <SelectItem key={district} value={district}>
-                                        {district}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
+                    <SortControls sortBy={sortBy} onSortChange={setSortBy} />
+                    <DistrictSelector
+                        selectedDistrict={selectedDistrict}
+                        districts={districts}
+                        onDistrictChange={setSelectedDistrict}
+                    />
                     <div className="text-muted-foreground text-right text-sm">
                         <p>顯示 {filteredAndSortedShops?.length} 筆資料</p>
                     </div>
@@ -158,47 +58,15 @@ function App() {
                         </AccordionItem>
                     </Accordion>
                 </div>
-                <ul className="space-y-4">
-                    {filteredAndSortedShops.map((shop, index) => {
-                        const rank = (index + 1)?.toString()?.padStart(2, '0');
-                        return (
-                            <Card key={shop.id}>
-                                <CardHeader>
-                                    <CardTitle>
-                                        {rank}. {shop.name}
-                                    </CardTitle>
-                                    <CardDescription>{shop.formattedAddress}</CardDescription>
-                                </CardHeader>
-                                <CardContent className="flex items-center justify-between">
-                                    <div className="flex gap-2">
-                                        <p className="flex items-center gap-1">
-                                            <Star className="size-4" />
-                                            {shop.rating}
-                                        </p>
-                                        <p className="flex items-center gap-1">
-                                            <MessageCircle className="size-4" />
-                                            {shop.userRatingCount}
-                                        </p>
-                                    </div>
-                                    <CardAction>
-                                        <Button
-                                            onClick={() => {
-                                                const { latitude, longitude } = shop.location;
-                                                const { name } = shop;
-                                                // 使用店家名稱和座標建立 Google Maps URL
-                                                const url = `https://www.google.com/maps/search/${encodeURIComponent(name)}/@${latitude},${longitude},15z`;
-                                                window.open(url, '_blank');
-                                            }}
-                                        >
-                                            View
-                                        </Button>
-                                    </CardAction>
-                                </CardContent>
-                            </Card>
-                        );
-                    })}
-                </ul>
+                <ShopList shops={filteredAndSortedShops} />
             </main>
+        );
+    };
+
+    return (
+        <>
+            <Header />
+            {renderContent()}
             <Footer />
         </>
     );
