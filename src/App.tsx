@@ -146,7 +146,17 @@ function App() {
                                 </p>
                             </div>
                             <CardAction>
-                                <Button>View</Button>
+                                <Button
+                                    onClick={() => {
+                                        const { latitude, longitude } = shop.location;
+                                        const { name } = shop;
+                                        // 使用店家名稱和座標建立 Google Maps URL
+                                        const url = `https://www.google.com/maps/search/${encodeURIComponent(name)}/@${latitude},${longitude},15z`;
+                                        window.open(url, '_blank');
+                                    }}
+                                >
+                                    View
+                                </Button>
                             </CardAction>
                         </CardContent>
                     </Card>
