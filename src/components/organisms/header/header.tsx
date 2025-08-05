@@ -26,7 +26,11 @@ const Header = () => {
         <header className="border-border/40 bg-background/60 sticky top-0 left-0 z-50 border-b shadow-md backdrop-blur-md">
             <div className="container mx-auto flex h-14.5 items-center justify-between px-4">
                 <div className="flex items-center gap-2">
-                    <img src="/favicons/favicon-32x32.png" alt="北市牛肉麵排行榜" className="h-8 w-8" />
+                    <img
+                        src={import.meta.env.BASE_URL + 'favicons/favicon-32x32.png'}
+                        alt="北市牛肉麵排行榜"
+                        className="h-8 w-8"
+                    />
                     <h1 className="text-2xl font-bold">北市牛肉麵排行榜</h1>
                 </div>
             </div>
