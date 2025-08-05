@@ -11,6 +11,7 @@
         "predeploy": "pnpm run build",
         "deploy": "gh-pages -d dist"
     },
+    "homepage": "https://garylin0969.github.io/taipei-beef-noodles-rank",
     "dependencies": {
         "@radix-ui/react-accordion": "^1.2.11",
         "@radix-ui/react-select": "^2.2.5",
