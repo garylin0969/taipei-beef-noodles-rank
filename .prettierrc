@@ -1,0 +1,13 @@
+{
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "semi": true,
+  "endOfLine": "auto",
+  "tabWidth": 4,
+  "printWidth": 120,
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "importOrder": ["^react$", "^react-dom$", "^@/(.*)$", "^[./]"]
+}
