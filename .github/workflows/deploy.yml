@@ -59,8 +59,8 @@ jobs:
 
             # 步驟 6: 安裝專案依賴
             - name: Install dependencies
-              # 使用 --frozen-lockfile 確保依賴版本一致性
-              run: pnpm install --frozen-lockfile
+              # 安裝依賴
+              run: pnpm install
 
             # 步驟 7: 執行程式碼檢查
             - name: Run linting
