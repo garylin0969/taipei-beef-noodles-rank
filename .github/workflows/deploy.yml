@@ -1,5 +1,5 @@
 # GitHub Actions 部署工作流程
-# 當推送到 main 分支或建立 PR 時自動觸發
+# 當推送到 main 分支時自動觸發
 name: Deploy to GitHub Pages
 
 # 觸發條件
@@ -7,14 +7,11 @@ on:
     # 當推送到 main 分支時觸發
     push:
         branches: [main]
-    # 當建立 PR 到 main 分支時觸發（只建置不部署）
-    pull_request:
-        branches: [main]
 
 # 定義工作任務
 jobs:
     # 建置和部署工作
-    build-and-deploy:
+    deploy:
         # 使用 Ubuntu 最新版作為執行環境
         runs-on: ubuntu-latest
 
@@ -38,48 +35,21 @@ jobs:
                   # 使用 pnpm 8 版本
                   version: 8
 
-            # 步驟 4: 取得 pnpm store 目錄路徑
-            - name: Get pnpm store directory
-              shell: bash
-              run: |
-                  # 將 pnpm store 路徑設定為環境變數
-                  echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-            # 步驟 5: 設定 pnpm 快取（提升建置速度）
-            - name: Setup pnpm cache
-              uses: actions/cache@v4
-              with:
-                  # 快取 pnpm store 目錄
-                  path: ${{ env.STORE_PATH }}
-                  # 使用 pnpm-lock.yaml 的雜湊值作為快取鍵
-                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-                  # 快取恢復鍵（如果完整鍵不存在，使用部分鍵）
-                  restore-keys: |
-                      ${{ runner.os }}-pnpm-store-
-
-            # 步驟 6: 安裝專案依賴
+            # 步驟 4: 安裝專案依賴
             - name: Install dependencies
-              # 安裝依賴
               run: pnpm install
 
-            # 步驟 7: 執行程式碼檢查
+            # 步驟 5: 執行程式碼檢查
             - name: Run linting
               run: pnpm lint
 
-            # 步驟 8: 建置專案
+            # 步驟 6: 建置專案
             - name: Build project
               run: pnpm build
 
-            # 步驟 9: 設定 Git 認證和部署
-            - name: Setup Git and Deploy
-              if: github.ref == 'refs/heads/main'
-              run: |
-                  # 設定 Git 認證
-                  git config --global user.name "github-actions[bot]"
-                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-                  # 設定 GitHub Token 為環境變數
-                  export GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-
-                  # 使用 gh-pages 部署，並設定正確的認證
-                  npx gh-pages -d dist --repo https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+            # 步驟 7: 部署到 GitHub Pages
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./dist
