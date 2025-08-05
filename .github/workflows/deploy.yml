@@ -75,7 +75,7 @@ jobs:
               # 只在 main 分支執行部署（避免 PR 時部署）
               if: github.ref == 'refs/heads/main'
               # 執行部署腳本
-              run: pnpm deploy
+              run: pnpm run deploy
               env:
                   # 提供 GitHub Token 給 gh-pages 使用
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
