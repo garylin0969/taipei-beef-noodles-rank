@@ -6,6 +6,7 @@ interface DistrictSelectorProps {
     onDistrictChange: (district: string) => void;
 }
 
+// 區域選擇器
 const DistrictSelector = ({ selectedDistrict, districts, onDistrictChange }: DistrictSelectorProps) => {
     return (
         <div className="flex flex-wrap items-center justify-center gap-2">

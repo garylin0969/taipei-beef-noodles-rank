@@ -6,6 +6,7 @@ interface RatingDisplayProps {
     className?: string;
 }
 
+// 評分顯示
 const RatingDisplay = ({ rating, className = '' }: RatingDisplayProps) => {
     return (
         <p className={cn('flex items-center gap-1', className)}>

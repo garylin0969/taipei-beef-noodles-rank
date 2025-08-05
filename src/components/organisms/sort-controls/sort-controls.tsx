@@ -14,6 +14,7 @@ interface SortControlsProps {
     onSortChange: (sortType: SortType) => void;
 }
 
+// 排序控制器
 const SortControls = ({ sortBy, onSortChange }: SortControlsProps) => {
     return (
         <div className="flex flex-wrap items-center justify-center gap-2">

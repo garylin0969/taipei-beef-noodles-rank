@@ -5,6 +5,7 @@ interface ShopListProps {
     shops: Shop[];
 }
 
+// 店家列表
 const ShopList = ({ shops }: ShopListProps) => {
     return (
         <ul className="space-y-4">

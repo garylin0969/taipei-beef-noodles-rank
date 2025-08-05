@@ -5,6 +5,7 @@ interface RankBadgeProps {
     className?: string;
 }
 
+// 排名徽章
 const RankBadge = ({ rank, className = '' }: RankBadgeProps) => {
     const formattedRank = rank.toString().padStart(2, '0');
 

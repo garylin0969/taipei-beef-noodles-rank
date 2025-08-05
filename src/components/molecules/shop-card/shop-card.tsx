@@ -10,6 +10,7 @@ interface ShopCardProps {
     rank: number;
 }
 
+// 店家卡片
 const ShopCard = ({ shop, rank }: ShopCardProps) => {
     // 使用 react-map-gl 實現地圖功能
     const handleViewOnMap = () => {

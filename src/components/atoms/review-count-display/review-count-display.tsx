@@ -6,6 +6,7 @@ interface ReviewCountDisplayProps {
     className?: string;
 }
 
+// 評論數顯示
 const ReviewCountDisplay = ({ count, className = '' }: ReviewCountDisplayProps) => {
     return (
         <p className={cn('flex items-center gap-1', className)}>

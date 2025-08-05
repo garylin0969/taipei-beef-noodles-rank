@@ -6,6 +6,7 @@ interface UseShopFiltersProps {
     shops: Shop[] | undefined;
 }
 
+// 店家過濾器
 const useShopFilters = ({ shops }: UseShopFiltersProps) => {
     const [selectedDistrict, setSelectedDistrict] = useState<string>('all');
     const [sortBy, setSortBy] = useState<SortType>(SortType.USER_RATING_COUNT);
