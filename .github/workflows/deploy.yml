@@ -70,7 +70,16 @@ jobs:
             - name: Build project
               run: pnpm build
 
-            # 步驟 9: 部署到 GitHub Pages
+            # 步驟 9: 設定 Git 認證
+            - name: Setup Git
+              if: github.ref == 'refs/heads/main'
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            # 步驟 10: 部署到 GitHub Pages
             - name: Deploy to GitHub Pages
               # 只在 main 分支執行部署（避免 PR 時部署）
               if: github.ref == 'refs/heads/main'
