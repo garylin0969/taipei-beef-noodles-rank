@@ -70,21 +70,16 @@ jobs:
             - name: Build project
               run: pnpm build
 
-            # 步驟 9: 設定 Git 認證
-            - name: Setup Git
+            # 步驟 9: 設定 Git 認證和部署
+            - name: Setup Git and Deploy
               if: github.ref == 'refs/heads/main'
               run: |
+                  # 設定 Git 認證
                   git config --global user.name "github-actions[bot]"
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            # 步驟 10: 部署到 GitHub Pages
-            - name: Deploy to GitHub Pages
-              # 只在 main 分支執行部署（避免 PR 時部署）
-              if: github.ref == 'refs/heads/main'
-              # 執行部署腳本
-              run: pnpm run deploy
-              env:
-                  # 提供 GitHub Token 給 gh-pages 使用
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  # 設定 GitHub Token 為環境變數
+                  export GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+
+                  # 使用 gh-pages 部署，並設定正確的認證
+                  npx gh-pages -d dist --repo https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
