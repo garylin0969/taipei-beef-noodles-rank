@@ -66,8 +66,24 @@ src/
 
 ## 📊 資料來源
 
-- **資料來源**：Google Maps API
-- **更新頻率**：定期更新
+### 資料架構
+
+由於本專案採用 SPA（單頁應用程式）架構，為避免 Google Maps API 流量超限，資料處理採用分離式架構：
+
+- **資料處理專案**：[json-gather](https://github.com/garylin0969/json-gather)
+  - 負責呼叫 Google Maps Places API (New)
+  - 將資料處理成靜態 JSON 檔案
+  - 部署到 GitHub Pages 提供資料服務
+
+- **前端專案**：本專案 (taipei-beef-noodles-rank)
+  - 透過 GitHub Pages 連結取得資料
+  - 資料來源：https://garylin0969.github.io/json-gather/data/taipei-beef-noodles.json
+  - 避免直接呼叫 Google Maps API，節省 API 配額
+
+### 資料資訊
+
+- **原始資料來源**：Google Maps Places API
+- **更新頻率**：每五天
 - **資料範圍**：台北市牛肉麵店家
 - **資料內容**：店家名稱、評分、評論數、地址、座標
 
