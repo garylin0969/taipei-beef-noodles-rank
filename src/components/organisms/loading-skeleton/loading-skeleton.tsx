@@ -1,8 +1,9 @@
 import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/utils/shadcn';
 
-const LoadingSkeleton = () => {
+const LoadingSkeleton = ({ className }: { className?: string }) => {
     return (
-        <main className="container mx-auto my-8 p-4">
+        <main className={cn('container mx-auto my-8 p-4', className)}>
             <Skeleton className="mb-4 h-4 w-48" />
             <div className="mb-4 flex flex-wrap items-center gap-2">
                 <Skeleton className="h-4 w-16" />

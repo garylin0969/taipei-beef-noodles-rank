@@ -17,12 +17,12 @@ function App() {
 
     const renderContent = () => {
         if (isLoading) {
-            return <LoadingSkeleton />;
+            return <LoadingSkeleton className="max-w-4xl" />;
         }
 
         if (error) {
             return (
-                <main className="container mx-auto my-8 p-4">
+                <main className="container mx-auto my-8 max-w-4xl p-4">
                     <p>載入失敗：{error?.message}</p>
                 </main>
             );
