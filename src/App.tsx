@@ -29,7 +29,7 @@ function App() {
         }
 
         return (
-            <main className="container mx-auto my-8 p-4">
+            <main className="container mx-auto my-8 max-w-4xl p-4">
                 <div className="mb-4 space-y-4">
                     <SortControls sortBy={sortBy} onSortChange={setSortBy} />
                     <DistrictSelector
