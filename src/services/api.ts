@@ -8,7 +8,7 @@ import type { TaipeiBeefNoodlesResponse, Shop } from '@/types';
  *
  * @returns {Promise<TaipeiBeefNoodlesResponse>} 回傳包含店家列表與統計資訊的 Promise 物件
  */
-export const getTaipeiBeefNoodles = async (): Promise<TaipeiBeefNoodlesResponse> => {
+export const GetTaipeiBeefNoodles = async (): Promise<TaipeiBeefNoodlesResponse> => {
   const response = await axios.get<TaipeiBeefNoodlesResponse>(
     'https://garylin0969.github.io/json-gather/data/taipei-beef-noodles.json'
   );

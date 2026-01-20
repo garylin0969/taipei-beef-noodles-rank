@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getTaipeiBeefNoodles } from '@/services';
+import { GetTaipeiBeefNoodles } from '@/services';
 import type { TaipeiBeefNoodlesResponse } from '@/types';
 
 /**
@@ -12,7 +12,7 @@ import type { TaipeiBeefNoodlesResponse } from '@/types';
 const useTaipeiBeefNoodles = () => {
     const query = useQuery<TaipeiBeefNoodlesResponse>({
         queryKey: ['taipei-beef-noodles'],
-        queryFn: getTaipeiBeefNoodles,
+        queryFn: GetTaipeiBeefNoodles,
     });
 
     return query;
