@@ -1,20 +1,21 @@
 import { MessageCircle, Star } from 'lucide-react';
 import SortButton from '@/components/molecules/sort-button';
-
-// 排序方式常數
-const SortType = {
-    USER_RATING_COUNT: 'userRatingCount',
-    RATING: 'rating',
-} as const;
-
-type SortType = (typeof SortType)[keyof typeof SortType];
+import { SortType } from '@/utils/sort-utils';
 
 interface SortControlsProps {
+    /** 目前的排序方式 */
     sortBy: SortType;
+    /** 排序變更事件處理函式 */
     onSortChange: (sortType: SortType) => void;
 }
 
-// 排序控制器
+/**
+ * 排序控制器元件
+ * 
+ * 提供使用者切換排序方式（評論數或評分）的介面。
+ * 
+ * @param {SortControlsProps} props - 元件屬性
+ */
 const SortControls = ({ sortBy, onSortChange }: SortControlsProps) => {
     return (
         <div className="flex flex-wrap items-center justify-center gap-2">

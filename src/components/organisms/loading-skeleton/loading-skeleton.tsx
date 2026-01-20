@@ -1,6 +1,14 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/utils/shadcn';
 
+/**
+ * 載入中骨架屏元件
+ * 
+ * 在資料載入期間顯示的佔位元件，模擬頁面佈局。
+ * 
+ * @param {Object} props - 元件屬性
+ * @param {string} [props.className] - 額外的 CSS class
+ */
 const LoadingSkeleton = ({ className }: { className?: string }) => {
     return (
         <main className={cn('container mx-auto my-8 p-4', className)}>

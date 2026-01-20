@@ -6,13 +6,25 @@ import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle }
 import type { Shop } from '@/types';
 
 interface ShopCardProps {
+    /** 店家資訊物件 */
     shop: Shop;
+    /** 排名 */
     rank: number;
 }
 
-// 店家卡片
+/**
+ * 店家卡片元件
+ * 
+ * 顯示單一店家的詳細資訊，包含名稱、地址、評分、評論數等。
+ * 提供按鈕連結至 Google Maps 查看。
+ * 
+ * @param {ShopCardProps} props - 元件屬性
+ */
 const ShopCard = ({ shop, rank }: ShopCardProps) => {
-    // 使用 react-map-gl 實現地圖功能
+    /**
+     * 開啟 Google Maps 連結
+     * 使用經緯度定位並搜尋店家名稱
+     */
     const handleViewOnMap = () => {
         const { latitude, longitude } = shop.location;
         const { name } = shop;

@@ -1,3 +1,8 @@
+/**
+ * 頁尾元件
+ * 
+ * 顯示版權資訊與作者連結。
+ */
 const Footer = () => {
     return (
         <footer className="border-t py-4 text-center text-sm tracking-wide">

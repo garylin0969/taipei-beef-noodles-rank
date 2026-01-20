@@ -8,12 +8,22 @@ export const SortType = {
 
 export type SortType = (typeof SortType)[keyof typeof SortType];
 
+// 顯示數量限制
+const LIMIT_ALL_DISTRICTS = 60;
+const LIMIT_SINGLE_DISTRICT = 5;
+
 /**
  * 根據排序方式和區域篩選店家
- * @param shops 店家列表
- * @param sortBy 排序方式
- * @param selectedDistrict 選擇的區域
- * @returns 篩選並排序後的店家列表
+ *
+ * 1. 根據區域篩選店家
+ * 2. 過濾掉無效資料（評論數或評分 <= 0）
+ * 3. 根據排序方式排序（評分或評論數）
+ * 4. 根據區域選擇限制回傳數量
+ *
+ * @param {Shop[]} shops - 店家列表
+ * @param {SortType} sortBy - 排序方式 (評分或評論數)
+ * @param {string} selectedDistrict - 選擇的區域 ('all' 或特定區域)
+ * @returns {Shop[]} 篩選並排序後的店家列表
  */
 export const filterAndSortShops = (shops: Shop[], sortBy: SortType, selectedDistrict: string): Shop[] => {
     if (!shops || shops.length === 0) return [];
@@ -43,24 +53,7 @@ export const filterAndSortShops = (shops: Shop[], sortBy: SortType, selectedDist
     });
 
     // 根據選擇的區域決定顯示數量
-    const limit = selectedDistrict === 'all' ? 60 : 5;
-
-    // 添加調試資訊
-    console.log('排序資訊:', {
-        totalShops: shops.length,
-        filteredShops: filteredShops.length,
-        validShops: validShops.length,
-        sortedShops: sortedShops.length,
-        limit,
-        sortBy,
-        selectedDistrict,
-        topShops: sortedShops.slice(0, 5).map((shop) => ({
-            name: shop.name,
-            rating: shop.rating,
-            userRatingCount: shop.userRatingCount,
-            district: shop.district,
-        })),
-    });
+    const limit = selectedDistrict === 'all' ? LIMIT_ALL_DISTRICTS : LIMIT_SINGLE_DISTRICT;
 
     return sortedShops.slice(0, limit);
 };
