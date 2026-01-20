@@ -9,7 +9,7 @@
 - **主要排序**：根據評論數或評分進行排序
 - **次要排序**：評分相同時，自動根據評論數進行次要排序
 - **區域篩選**：支援台北市各行政區篩選
-- **動態顯示**：全部區域顯示前60筆，特定區域顯示前5筆
+- **動態顯示**：全部區域顯示前 60 筆，特定區域顯示前 5 筆
 
 ### 🗺️ 地圖整合
 
@@ -42,26 +42,28 @@
 ```
 src/
 ├── components/
-│   ├── atoms/           # 原子元件
-│   │   ├── rank-badge/  # 排名徽章
+│   ├── atoms/               # 原子元件
+│   │   ├── rank-badge/      # 排名徽章
 │   │   ├── rating-display/  # 評分顯示
 │   │   └── review-count-display/  # 評論數顯示
-│   ├── molecules/       # 分子元件
-│   │   ├── sort-button/ # 排序按鈕
-│   │   └── shop-card/   # 店家卡片
-│   ├── organisms/       # 有機體元件
-│   │   ├── sort-controls/  # 排序控制
+│   ├── molecules/           # 分子元件
+│   │   ├── declaration-section/ # 聲明區塊
+│   │   ├── sort-button/     # 排序按鈕
+│   │   └── shop-card/       # 店家卡片
+│   ├── organisms/           # 有機體元件
+│   │   ├── sort-controls/   # 排序控制
 │   │   ├── district-selector/  # 區域選擇器
-│   │   ├── shop-list/   # 店家列表
+│   │   ├── shop-list/       # 店家列表
 │   │   ├── loading-skeleton/  # 載入骨架屏
-│   │   ├── header/      # 頁面標題
-│   │   └── footer/      # 頁面底部
-│   └── ui/              # UI 基礎元件
-├── hooks/               # 自定義 Hooks
-├── services/            # API 服務
-├── types/               # TypeScript 型別定義
-├── utils/               # 工具函數
-└── App.tsx             # 主應用程式
+│   │   ├── header/          # 頁面標題
+│   │   └── footer/          # 頁面底部
+│   └── ui/                  # UI 基礎元件
+├── hooks/                   # 自定義 Hooks
+├── providers/               # 應用程式 Providers
+├── services/                # API 服務
+├── types/                   # TypeScript 型別定義
+├── utils/                   # 工具函數
+└── App.tsx                  # 主應用程式
 ```
 
 ## 📊 資料來源
@@ -96,8 +98,8 @@ src/
 
 ### 區域篩選
 
-- **全部區域**：顯示台北市所有區域的前60名店家
-- **特定區域**：選擇特定行政區，顯示該區域前5名店家
+- **全部區域**：顯示台北市所有區域的前 60 名店家
+- **特定區域**：選擇特定行政區，顯示該區域前 5 名店家
 
 ### 地圖功能
 
