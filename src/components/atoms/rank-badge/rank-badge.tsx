@@ -9,9 +9,9 @@ interface RankBadgeProps {
 
 /**
  * 排名徽章元件
- * 
+ *
  * 顯示店家的排名數字，自動補零至兩位數。
- * 
+ *
  * @param {RankBadgeProps} props - 元件屬性
  */
 const RankBadge = ({ rank, className = '' }: RankBadgeProps) => {

@@ -14,10 +14,10 @@ interface ShopCardProps {
 
 /**
  * 店家卡片元件
- * 
+ *
  * 顯示單一店家的詳細資訊，包含名稱、地址、評分、評論數等。
  * 提供按鈕連結至 Google Maps 查看。
- * 
+ *
  * @param {ShopCardProps} props - 元件屬性
  */
 const ShopCard = ({ shop, rank }: ShopCardProps) => {

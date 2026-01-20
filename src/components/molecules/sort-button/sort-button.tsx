@@ -14,9 +14,9 @@ interface SortButtonProps {
 
 /**
  * 排序按鈕元件
- * 
+ *
  * 顯示帶有圖示的排序按鈕，根據啟用狀態改變樣式。
- * 
+ *
  * @param {SortButtonProps} props - 元件屬性
  */
 const SortButton = ({ icon: Icon, label, isActive, onClick }: SortButtonProps) => {

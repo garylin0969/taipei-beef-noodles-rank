@@ -10,9 +10,9 @@ interface ReviewCountDisplayProps {
 
 /**
  * 評論數顯示元件
- * 
+ *
  * 顯示帶有訊息圖示的評論數量。
- * 
+ *
  * @param {ReviewCountDisplayProps} props - 元件屬性
  */
 const ReviewCountDisplay = ({ count, className = '' }: ReviewCountDisplayProps) => {

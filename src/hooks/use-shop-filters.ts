@@ -12,9 +12,9 @@ interface UseShopFiltersProps {
 
 /**
  * 店家過濾與排序 Hook
- * 
+ *
  * 管理店家列表的區域篩選與排序狀態，並計算篩選後的結果。
- * 
+ *
  * @param {UseShopFiltersProps} props - Hook 的輸入參數
  * @returns 包含狀態控制函數與篩選結果的物件
  */

@@ -6,10 +6,10 @@ interface DeclarationSectionProps {
 
 /**
  * 聲明區塊元件
- * 
+ *
  * 顯示網站的免責聲明、資料來源及更新時間等資訊。
  * 使用 Accordion 收合內容以節省空間。
- * 
+ *
  * @param {string} updateTime - 資料更新時間字串
  */
 export const DeclarationSection = ({ updateTime }: DeclarationSectionProps) => {

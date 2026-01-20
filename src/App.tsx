@@ -10,7 +10,7 @@ import useTaipeiBeefNoodles from '@/hooks/use-taipei-beef-noodles';
 
 /**
  * 主應用程式元件
- * 
+ *
  * 整合 Header, Footer 以及主要內容區域。
  * 處理資料載入、錯誤狀態以及店家列表的顯示。
  */

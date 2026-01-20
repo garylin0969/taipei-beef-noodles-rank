@@ -11,9 +11,9 @@ interface SortControlsProps {
 
 /**
  * 排序控制器元件
- * 
+ *
  * 提供使用者切換排序方式（評論數或評分）的介面。
- * 
+ *
  * @param {SortControlsProps} props - 元件屬性
  */
 const SortControls = ({ sortBy, onSortChange }: SortControlsProps) => {

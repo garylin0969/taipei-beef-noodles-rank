@@ -10,9 +10,9 @@ interface RatingDisplayProps {
 
 /**
  * 評分顯示元件
- * 
+ *
  * 顯示帶有星星圖示的評分分數。
- * 
+ *
  * @param {RatingDisplayProps} props - 元件屬性
  */
 const RatingDisplay = ({ rating, className = '' }: RatingDisplayProps) => {

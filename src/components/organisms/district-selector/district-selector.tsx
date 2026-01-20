@@ -11,9 +11,9 @@ interface DistrictSelectorProps {
 
 /**
  * 區域選擇器元件
- * 
+ *
  * 提供下拉式選單讓使用者篩選特定區域的店家。
- * 
+ *
  * @param {DistrictSelectorProps} props - 元件屬性
  */
 const DistrictSelector = ({ selectedDistrict, districts, onDistrictChange }: DistrictSelectorProps) => {
@@ -21,7 +21,7 @@ const DistrictSelector = ({ selectedDistrict, districts, onDistrictChange }: Dis
         <div className="flex flex-wrap items-center justify-center gap-2">
             <span>區域選擇</span>
             <Select value={selectedDistrict} onValueChange={onDistrictChange}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-45">
                     <SelectValue placeholder="全部" />
                 </SelectTrigger>
                 <SelectContent>

@@ -24,7 +24,7 @@ const SOCIAL_LINKS = [
 
 /**
  * 頁首元件
- * 
+ *
  * 顯示網站標題、Logo 以及社群媒體連結。
  */
 const Header = () => {

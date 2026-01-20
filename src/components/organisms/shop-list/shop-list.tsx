@@ -8,9 +8,9 @@ interface ShopListProps {
 
 /**
  * 店家列表元件
- * 
+ *
  * 渲染店家卡片的列表。
- * 
+ *
  * @param {ShopListProps} props - 元件屬性
  */
 const ShopList = ({ shops }: ShopListProps) => {

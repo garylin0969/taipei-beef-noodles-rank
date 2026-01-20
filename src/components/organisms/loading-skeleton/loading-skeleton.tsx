@@ -3,9 +3,9 @@ import { cn } from '@/utils/shadcn';
 
 /**
  * 載入中骨架屏元件
- * 
+ *
  * 在資料載入期間顯示的佔位元件，模擬頁面佈局。
- * 
+ *
  * @param {Object} props - 元件屬性
  * @param {string} [props.className] - 額外的 CSS class
  */
@@ -20,7 +20,7 @@ const LoadingSkeleton = ({ className }: { className?: string }) => {
             </div>
             <div className="mb-4 flex flex-wrap items-center gap-2">
                 <Skeleton className="h-4 w-16" />
-                <Skeleton className="h-10 w-[180px]" />
+                <Skeleton className="h-10 w-45" />
             </div>
             <div className="space-y-4">
                 {Array.from({ length: 5 }).map((_, index) => (
