@@ -7,11 +7,8 @@
         "dev": "vite",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
-        "preview": "vite preview",
-        "predeploy": "pnpm run build",
-        "deploy": "gh-pages -d dist"
+        "preview": "vite preview"
     },
-    "homepage": "https://garylin0969.github.io/taipei-beef-noodles-rank",
     "dependencies": {
         "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-select": "^2.2.6",
@@ -22,7 +19,6 @@
         "axios": "^1.13.4",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
-        "gh-pages": "^6.3.0",
         "lucide-react": "^0.536.0",
         "react": "^19.2.4",
         "react-dom": "^19.2.4",

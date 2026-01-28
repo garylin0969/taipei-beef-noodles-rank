@@ -121,66 +121,15 @@ src/
 
 ## 🚀 部署指南
 
-### 自動部署（推薦）
+### Vercel 部署
 
-本專案已設定 GitHub Actions 自動部署，推送到 main 分支時會自動部署到 GitHub Pages。
+本專案使用 Vercel 進行部署。
 
-#### 部署流程
+#### 自動部署
 
-1. **推送程式碼到 main 分支**
+當推送到 main 分支時，Vercel 會自動觸發建置與部署。
 
-```bash
-git add .
-git commit -m "Update: 更新內容"
-git push origin main
-```
-
-2. **檢查部署狀態**
-
-- 前往 GitHub Repository 的 **Actions** 標籤
-- 查看 `Deploy to GitHub Pages` 工作流程執行狀態
-
-3. **訪問部署網站**
-
-- 部署成功後，網站會自動更新
-- 網址：https://garylin0969.github.io/taipei-beef-noodles-rank
-
-#### GitHub 設定檢查清單
-
-- 已啟用 GitHub Pages（Settings > Pages > Source: Deploy from a branch > gh-pages）
-- 已設定 Actions 權限（Settings > Actions > General > Workflow permissions: Read and write）
-- 已建立 `.github/workflows/deploy.yml` 檔案
-
-### 手動部署
-
-如果需要手動部署：
-
-```bash
-# 建置專案
-pnpm build
-
-# 部署到 GitHub Pages
-pnpm deploy
-```
-
-### 部署腳本說明
-
-在 `package.json` 中定義的部署腳本：
-
-```json
-{
-    "scripts": {
-        "predeploy": "pnpm run build", // 部署前自動建置
-        "deploy": "gh-pages -d dist" // 部署 dist 目錄到 gh-pages 分支
-    }
-}
-```
-
-### 部署相關檔案
-
-- `.github/workflows/deploy.yml` - GitHub Actions 自動部署工作流程
-- `package.json` - 包含部署腳本和 gh-pages 依賴
-- `dist/` - 建置後的靜態檔案（部署時會上傳到 gh-pages 分支）
+- 網站網址：https://taipei-beef-noodles-rank.garylin.dev
 
 ## 聲明
 
